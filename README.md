@@ -32,6 +32,71 @@
   ```
 
 
+## Descrição das Entidades
+
+1. **Aluno**
+   
+A entidade Aluno representa as crianças que utilizarão a plataforma para aprender idiomas.
+
+Atributos:
+- id: Identificador único do aluno (gerado automaticamente).
+- nome: Nome completo do aluno.
+- usuario: Nome de usuário para login no sistema.
+- senha: Senha para acesso ao sistema (armazenada de forma segura).
+- responsavel: Relacionamento com a entidade Responsavel (muitos-para-um).
+- atividades: Lista de atividades associadas ao aluno (um-para-muitos).
+- scoreboard: Relacionamento com a entidade Scoreboard (um-para-um).
+
+2. **Responsavel**
+   
+A entidade Responsavel representa os pais ou responsáveis pelas crianças.
+
+Atributos:
+
+- id: Identificador único do responsável (gerado automaticamente).
+- nome: Nome completo do responsável.
+- usuario: Nome de usuário para login no sistema.
+- senha: Senha para acesso ao sistema (armazenada de forma segura).
+- alunos: Lista de alunos sob responsabilidade (um-para-muitos).
+
+3. **Atividade**
+   
+A entidade Atividade representa as atividades que os alunos podem realizar.
+
+Atributos:
+
+- id: Identificador único da atividade (gerado automaticamente).
+- titulo: Título da atividade.
+- descricao: Descrição detalhada da atividade.
+- pontuacao: Pontuação atribuída à atividade.
+- aluno: Relacionamento com a entidade Aluno (muitos-para-um).
+
+
+4. **Scoreboard**
+   
+A entidade Scoreboard representa o sistema de pontuação dos alunos.
+
+Atributos:
+
+- id: Identificador único do scoreboard (gerado automaticamente).
+- aluno: Relacionamento com a entidade Aluno (um-para-um).
+- pontuacaoTotal: Total de pontos acumulados pelo aluno.
+- atividades: Lista de atividades que contribuíram para a pontuação (um-para-muitos).
+
+
+5. **Notificacao**
+   
+A entidade Notificacao representa as notificações que podem ser enviadas aos responsáveis e alunos.
+
+Atributos:
+
+- id: Identificador único da notificação (gerado automaticamente).
+- mensagem: Texto da notificação.
+- data: Data em que a notificação foi enviada.
+- responsavel: Relacionamento com a entidade Responsavel (muitos-para-um).
+- aluno: Relacionamento com a entidade Aluno (muitos-para-um).
+
+
 ## Endpoints do Backend
 
 | Método HTTP | Endpoint                      | Descrição                                                    |
