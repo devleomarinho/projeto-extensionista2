@@ -20,7 +20,7 @@
 
 1. **Clone o repositório:**
    ```bash
-   git clone https://github.com/dev-leomarinho/projeto-extensionista2.git
+   git clone https://github.com/devleomarinho/projeto-extensionista2.git
 
 2. **Acesse o diretório:**
    ```bash
