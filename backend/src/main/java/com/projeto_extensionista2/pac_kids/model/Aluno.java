@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -23,21 +22,14 @@ public class Aluno {
 
     private String email;
 
+    private String cpf;
+
     private LocalDate dataNascimento;
 
-    @ManyToOne
-    @JoinColumn(name = "responsavel_id", nullable = false)
-    private Responsavel responsavel;
-
-    @OneToMany(mappedBy = "aluno", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Atividade> atividades;
-
-    @OneToOne(mappedBy = "aluno", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Scoreboard scoreboard;
 
     @Column(unique = true, nullable = false)
     private String username;
 
     @Column(nullable = false)
-    private String senha;
+    private String password;
 }
