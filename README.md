@@ -30,8 +30,15 @@
   ```bash
   git checkout dev
   ```
-
-
+4. **Alterar as configurações do banco de dados:**
+   
+   Edite o arquivo application.properties, substituindo os campos abaixo pelo nome do banco, host, usuário e senha de acordo com as configurações locais da sua máquina:
+   ```bash
+       spring.application.name=pac-kids
+      spring.datasource.url=jdbc:postgresql://localhost:5432/pac-kids
+      spring.datasource.username=seuusuario
+      spring.datasource.password=suasenha
+   ```
 ## Descrição das Entidades
 
 1. **Aluno**
@@ -41,6 +48,9 @@ A entidade Aluno representa as crianças que utilizarão a plataforma para apren
 Atributos:
 - id: Identificador único do aluno (gerado automaticamente).
 - nome: Nome completo do aluno.
+- email: Email do aluno.
+- CPF: CPF do Aluno.
+- dataNascimento: Data de nascimento do aluno.
 - usuario: Nome de usuário para login no sistema.
 - senha: Senha para acesso ao sistema (armazenada de forma segura).
 - responsavel: Relacionamento com a entidade Responsavel (muitos-para-um).
@@ -55,9 +65,13 @@ Atributos:
 
 - id: Identificador único do responsável (gerado automaticamente).
 - nome: Nome completo do responsável.
+- email: Email do responsável.
+- CPF: CPF do responsável.
+- telefone: Telefone do responsável.
 - usuario: Nome de usuário para login no sistema.
 - senha: Senha para acesso ao sistema (armazenada de forma segura).
 - alunos: Lista de alunos sob responsabilidade (um-para-muitos).
+- notificacoes: Lista de notificações recebidas pelo responsável (um-para-muitos).
 
 3. **Atividade**
    
@@ -68,7 +82,9 @@ Atributos:
 - id: Identificador único da atividade (gerado automaticamente).
 - titulo: Título da atividade.
 - descricao: Descrição detalhada da atividade.
+- tipo: Tipo da atividade realizada.
 - pontuacao: Pontuação atribuída à atividade.
+- dataConclusao: Data de conclusão da atividade
 - aluno: Relacionamento com a entidade Aluno (muitos-para-um).
 
 
@@ -79,8 +95,9 @@ A entidade Scoreboard representa o sistema de pontuação dos alunos.
 Atributos:
 
 - id: Identificador único do scoreboard (gerado automaticamente).
-- aluno: Relacionamento com a entidade Aluno (um-para-um).
 - pontuacaoTotal: Total de pontos acumulados pelo aluno.
+- ultimaAtualizacao: Data da atualização mais recente.
+- aluno: Relacionamento com a entidade Aluno (um-para-um).
 - atividades: Lista de atividades que contribuíram para a pontuação (um-para-muitos).
 
 
@@ -92,7 +109,7 @@ Atributos:
 
 - id: Identificador único da notificação (gerado automaticamente).
 - mensagem: Texto da notificação.
-- data: Data em que a notificação foi enviada.
+- dataEnvio: Data em que a notificação foi enviada.
 - responsavel: Relacionamento com a entidade Responsavel (muitos-para-um).
 - aluno: Relacionamento com a entidade Aluno (muitos-para-um).
 
@@ -101,18 +118,20 @@ Atributos:
 
 | Método HTTP | Endpoint                      | Descrição                                                    |
 |-------------|-------------------------------|-------------------------------------------------------------|
-| **POST**    | `/api/alunos`                 | Cadastra um novo aluno.                                      |
-| **GET**     | `/api/alunos/{id}`            | Retorna informações de um aluno específico pelo ID.          |
-| **GET**     | `/api/alunos/{id}/scoreboard` | Retorna o scoreboard do aluno.                               |
-| **PUT**     | `/api/alunos/{id}`            | Atualiza informações de um aluno.                            |
-| **DELETE**  | `/api/alunos/{id}`            | Remove um aluno do sistema.                                  |
-| **POST**    | `/api/responsaveis`           | Cadastra um novo responsável.                                |
-| **GET**     | `/api/responsaveis/{id}`      | Retorna informações de um responsável específico pelo ID.    |
-| **GET**     | `/api/responsaveis/{id}/scoreboards` | Retorna scoreboards de todos os alunos sob a responsabilidade do responsável. |
-| **POST**    | `/api/atividades`             | Cadastra uma nova atividade.                                 |
-| **GET**     | `/api/atividades/{id}`        | Retorna informações de uma atividade específica pelo ID.     |
-| **PUT**     | `/api/atividades/{id}`        | Atualiza informações de uma atividade.                       |
-| **DELETE**  | `/api/atividades/{id}`        | Remove uma atividade do sistema.                             |
-| **GET**     | `/api/notificacoes`           | Lista todas as notificações enviadas.                        |
+| **POST**    | `/alunos`                     | Cadastra um novo aluno.                                      |
+| **GET**     | `/alunos`                     | Retorna informações sobre todos os alunos cadastrados        |
+| **GET**     | `/alunos/{id}`                | Retorna informações de um aluno específico pelo ID.          |
+| **GET**     | `/alunos/{id}/scoreboard`     | Retorna o scoreboard do aluno.                               |
+| **PUT**     | `/alunos/{id}`                | Atualiza informações de um aluno.                            |
+| **DELETE**  | `/alunos/{id}`                | Remove um aluno do sistema.                                  |
+| **POST**    | `/responsaveis`               | Cadastra um novo responsável.                                |
+| **GET**     | `/responsaveis`               | Retorna informações sobre todos os responsáveis.             |
+| **GET**     | `/responsaveis/{id}`          | Retorna informações de um responsável específico pelo ID.    |
+| **GET**     | `/responsaveis/{id}/scoreboards` | Retorna scoreboards de todos os alunos sob a responsabilidade do responsável. |
+| **POST**    | `/atividades`                 | Cadastra uma nova atividade.                                 |
+| **GET**     | `/atividades/{id}`            | Retorna informações de uma atividade específica pelo ID.     |
+| **PUT**     | `/atividades/{id}`            | Atualiza informações de uma atividade.                       |
+| **DELETE**  | `/atividades/{id}`            | Remove uma atividade do sistema.                             |
+| **GET**     | `/notificacoes`               | Lista todas as notificações enviadas.                        |
 
 
