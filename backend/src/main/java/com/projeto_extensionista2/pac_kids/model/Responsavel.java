@@ -1,10 +1,10 @@
 package com.projeto_extensionista2.pac_kids.model;
 
-
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Aluno {
+public class Responsavel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,15 +20,16 @@ public class Aluno {
 
     private String nome;
 
+    private String cpf;
+
     private String email;
 
-    private String cpf;
+    private String telefone;
 
     private LocalDate dataNascimento;
 
-    @ManyToOne
-    @JoinColumn(name = "responsavel_id")
-    private Responsavel responsavel;
+    @OneToMany(mappedBy = "responsavel", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Aluno> alunos;
 
     @Column(unique = true, nullable = false)
     private String username;
@@ -36,3 +37,4 @@ public class Aluno {
     @Column(nullable = false)
     private String password;
 }
+

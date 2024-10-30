@@ -41,6 +41,7 @@ public class AlunoService {
         alunoExistente.setNome(aluno.getNome());
         alunoExistente.setEmail(aluno.getEmail());
         alunoExistente.setCpf(aluno.getCpf());
+        alunoExistente.setDataNascimento(aluno.getDataNascimento());
         alunoRepository.save(alunoExistente);
 
     }
