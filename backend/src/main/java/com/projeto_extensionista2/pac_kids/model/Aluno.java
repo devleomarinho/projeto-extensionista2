@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -20,8 +21,6 @@ public class Aluno {
 
     private String nome;
 
-    private String email;
-
     private String cpf;
 
     private LocalDate dataNascimento;
@@ -29,6 +28,12 @@ public class Aluno {
     @ManyToOne
     @JoinColumn(name = "responsavel_id")
     private Responsavel responsavel;
+
+    @OneToMany(mappedBy = "aluno", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Atividade> atividades = new ArrayList<>();
+
+    @OneToOne(mappedBy = "aluno", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Scoreboard scoreboard;
 
     @Column(unique = true, nullable = false)
     private String username;

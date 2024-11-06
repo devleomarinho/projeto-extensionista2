@@ -19,5 +19,7 @@ public class Atividade {
     @JoinColumn(name = "scoreboard_id")
     private Scoreboard scoreboard;
 
-
+    @ManyToOne
+    @JoinColumn(name = "aluno_id")
+    private Aluno aluno;
 }

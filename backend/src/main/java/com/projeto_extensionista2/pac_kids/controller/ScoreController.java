@@ -1,6 +1,5 @@
 package com.projeto_extensionista2.pac_kids.controller;
 
-
 import com.projeto_extensionista2.pac_kids.model.Atividade;
 import com.projeto_extensionista2.pac_kids.model.Scoreboard;
 import com.projeto_extensionista2.pac_kids.service.ScoreboardService;
@@ -9,9 +8,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api/score")
+@RequestMapping("/scoreboard")
 public class ScoreController {
 
     @Autowired
@@ -24,9 +24,9 @@ public class ScoreController {
     }
 
     @PostMapping("/{alunoId}/atividades")
-    public ResponseEntity<Scoreboard> addAtividade(@PathVariable Long alunoId, @RequestBody Atividade atividade) {
+    public ResponseEntity<Scoreboard> addAtividade(@PathVariable Long alunoId, @Valid @RequestBody Atividade atividade) {
         Scoreboard updatedScoreboard = scoreboardService.addAtividade(alunoId, atividade);
-        return updatedScoreboard != null ? ResponseEntity.ok(updatedScoreboard) : ResponseEntity.notFound().build();
+        return ResponseEntity.ok(updatedScoreboard);
     }
 
     @GetMapping("/{alunoId}/atividades")
@@ -36,8 +36,8 @@ public class ScoreController {
     }
 
     @PutMapping("/{alunoId}")
-    public ResponseEntity<Scoreboard> updateScoreboard(@PathVariable Long alunoId, @RequestBody Scoreboard updatedScoreboard) {
+    public ResponseEntity<Scoreboard> updateScoreboard(@PathVariable Long alunoId, @Valid @RequestBody Scoreboard updatedScoreboard) {
         Scoreboard scoreboard = scoreboardService.updateScoreboard(alunoId, updatedScoreboard);
-        return scoreboard != null ? ResponseEntity.ok(scoreboard) : ResponseEntity.notFound().build();
+        return ResponseEntity.ok(scoreboard);
     }
 }

@@ -6,9 +6,12 @@ import com.projeto_extensionista2.pac_kids.repository.AtividadeRepository;
 import com.projeto_extensionista2.pac_kids.repository.ScoreboardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
+import org.springframework.http.HttpStatus;
 
 import java.util.List;
-
+import java.util.Date;
 
 @Service
 public class ScoreboardService {
@@ -23,16 +26,16 @@ public class ScoreboardService {
         return scoreboardRepository.findByAlunoId(alunoId);
     }
 
+    @Transactional
     public Scoreboard addAtividade(Long alunoId, Atividade atividade) {
         Scoreboard scoreboard = findByAlunoId(alunoId);
-        if (scoreboard != null) {
-            scoreboard.setPontuacaoTotal(scoreboard.getPontuacaoTotal() + atividade.getPontuacao());
-            scoreboard.getAtividades().add(atividade);
-            atividade.setScoreboard(scoreboard);
-            atividadeRepository.save(atividade);
-            return scoreboardRepository.save(scoreboard);
+        if (scoreboard == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Scoreboard not found for alunoId " + alunoId);
         }
-        return null;
+        scoreboard.adicionarPontuacao(atividade.getPontuacao());
+        atividade.setScoreboard(scoreboard);
+        atividadeRepository.save(atividade);
+        return scoreboardRepository.save(scoreboard);
     }
 
     public List<Atividade> findAtividadesByAlunoId(Long alunoId) {
@@ -40,13 +43,14 @@ public class ScoreboardService {
         return scoreboard != null ? scoreboard.getAtividades() : null;
     }
 
+    @Transactional
     public Scoreboard updateScoreboard(Long alunoId, Scoreboard updatedScoreboard) {
         Scoreboard scoreboard = findByAlunoId(alunoId);
-        if (scoreboard != null) {
-            scoreboard.setPontuacaoTotal(updatedScoreboard.getPontuacaoTotal());
-            scoreboard.setUltimaAtualizacao(updatedScoreboard.getUltimaAtualizacao());
-            return scoreboardRepository.save(scoreboard);
+        if (scoreboard == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Scoreboard not found for alunoId " + alunoId);
         }
-        return null;
+        scoreboard.setPontuacao(updatedScoreboard.getPontuacao());
+        scoreboard.setUltimaAtualizacao(new Date());
+        return scoreboardRepository.save(scoreboard);
     }
 }

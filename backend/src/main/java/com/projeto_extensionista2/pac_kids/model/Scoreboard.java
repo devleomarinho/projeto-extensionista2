@@ -14,10 +14,10 @@ public class Scoreboard {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private int pontuacaoTotal;
+    private int pontuacao = 0;
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date ultimaAtualizacao;
+    private Date ultimaAtualizacao = new Date();
 
     @OneToOne
     @JoinColumn(name = "aluno_id", referencedColumnName = "id")
@@ -25,4 +25,9 @@ public class Scoreboard {
 
     @OneToMany(mappedBy = "scoreboard", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Atividade> atividades = new ArrayList<>();
+
+    public void adicionarPontuacao(int pontos) {
+        this.pontuacao += pontos;
+        this.ultimaAtualizacao = new Date();
+    }
 }
