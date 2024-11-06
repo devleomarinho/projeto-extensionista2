@@ -23,6 +23,8 @@ public class Aluno {
 
     private String cpf;
 
+    private String email;
+
     private LocalDate dataNascimento;
 
     @ManyToOne
