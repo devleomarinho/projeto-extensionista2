@@ -1,7 +1,6 @@
 package com.projeto_extensionista2.pac_kids.controller;
 
 import com.projeto_extensionista2.pac_kids.model.Aluno;
-import com.projeto_extensionista2.pac_kids.model.Scoreboard;
 import com.projeto_extensionista2.pac_kids.service.AlunoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,17 +34,7 @@ public class AlunoController {
         return alunoService.buscarAlunoPorId(id);
     }
 
-    @GetMapping("/{id}/scoreboard")
-    @ResponseStatus(HttpStatus.OK)
-    public Optional<Scoreboard> obterScoreboardDoAluno(@PathVariable Long id) {
-        return alunoService.buscarScoreboardDoAluno(id);
-    }
 
-    @PutMapping("/{id}/scoreboard")
-    @ResponseStatus(HttpStatus.OK)
-    public void atualizarPontuacao(@PathVariable Long id, @RequestParam int pontuacao) {
-        alunoService.atualizarPontuacao(id, pontuacao);
-    }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

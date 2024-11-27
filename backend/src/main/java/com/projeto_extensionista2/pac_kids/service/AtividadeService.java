@@ -1,7 +1,13 @@
 package com.projeto_extensionista2.pac_kids.service;
 
+import com.projeto_extensionista2.pac_kids.dtos.AtividadeComPerguntasDTO;
+import com.projeto_extensionista2.pac_kids.dtos.PerguntaDTO;
 import com.projeto_extensionista2.pac_kids.model.Atividade;
+import com.projeto_extensionista2.pac_kids.model.Pergunta;
+import com.projeto_extensionista2.pac_kids.model.Resposta;
 import com.projeto_extensionista2.pac_kids.repository.AtividadeRepository;
+import com.projeto_extensionista2.pac_kids.repository.PerguntaRepository;
+import com.projeto_extensionista2.pac_kids.repository.RespostaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -13,34 +19,32 @@ public class AtividadeService {
     @Autowired
     private AtividadeRepository atividadeRepository;
 
-    // Lista todas as atividades
-    public List<Atividade> getAllAtividades() {
+    @Autowired
+    private PerguntaRepository perguntaRepository;
+
+    @Autowired
+    private RespostaRepository respostaRepository;
+
+    public List<Atividade> listarAtividades() {
         return atividadeRepository.findAll();
     }
 
-    // Busca uma atividade por ID
-    public Optional<Atividade> getAtividadeById(Long id) {
+
+    public Optional<Atividade> listarAtividadePorId(Long id) {
         return atividadeRepository.findById(id);
     }
 
-    // Cria uma nova atividade
-    public Atividade createAtividade(Atividade atividade) {
-        return atividadeRepository.save(atividade);
-    }
-
-    // Atualiza uma atividade existente
     public Optional<Atividade> updateAtividade(Long id, Atividade atividadeDetails) {
         return atividadeRepository.findById(id)
                 .map(atividade -> {
-                    atividade.setTitulo(atividadeDetails.getTitulo());
+                    atividade.setNome(atividadeDetails.getNome());
                     atividade.setDescricao(atividadeDetails.getDescricao());
-                    atividade.setPontuacao(atividadeDetails.getPontuacao());
                     atividade.setScoreboard(atividadeDetails.getScoreboard());
                     return atividadeRepository.save(atividade);
                 });
     }
 
-    // Exclui uma atividade
+
     public boolean deleteAtividade(Long id) {
         return atividadeRepository.findById(id)
                 .map(atividade -> {
@@ -48,4 +52,47 @@ public class AtividadeService {
                     return true;
                 }).orElse(false);
     }
+
+    public Atividade criarAtividadeComPerguntas(AtividadeComPerguntasDTO atividadeDTO) {
+        Atividade novaAtividade = new Atividade();
+        novaAtividade.setNome(atividadeDTO.getNome());
+        novaAtividade.setDescricao(atividadeDTO.getDescricao());
+        atividadeRepository.save(novaAtividade);
+
+        for (PerguntaDTO perguntaDTO : atividadeDTO.getPerguntas()) {
+            Pergunta pergunta = new Pergunta();
+            pergunta.setTexto(perguntaDTO.getTexto());
+            pergunta.setAtividade(novaAtividade);
+            perguntaRepository.save(pergunta);
+
+            Resposta resposta = new Resposta();
+            resposta.setTexto(perguntaDTO.getResposta().getTexto());
+            resposta.setPergunta(pergunta);
+            respostaRepository.save(resposta);
+        }
+
+        return novaAtividade;
+    }
+
+    public String verificarResposta(Long perguntaId, String respostaUsuario) {
+        Pergunta pergunta = perguntaRepository.findById(perguntaId)
+                .orElseThrow(() -> new RuntimeException("Pergunta não encontrada"));
+
+        Resposta respostaCorreta = respostaRepository.findByPerguntaId(perguntaId)
+                .orElseThrow(() -> new RuntimeException("Resposta não encontrada"));
+
+        if (respostaCorreta.getTexto().equalsIgnoreCase(respostaUsuario)) {
+            Atividade atividade = pergunta.getAtividade();
+            atividade.setScoreboard(atividade.getScoreboard() + 1);
+            atividadeRepository.save(atividade);
+            return "Resposta correta! Pontuação: " + atividade.getScoreboard();
+        } else {
+            return "Resposta incorreta.";
+        }
+    }
+
+
+
+
+
 }

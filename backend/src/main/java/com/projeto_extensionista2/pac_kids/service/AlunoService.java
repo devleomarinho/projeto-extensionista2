@@ -1,7 +1,6 @@
 package com.projeto_extensionista2.pac_kids.service;
 
 import com.projeto_extensionista2.pac_kids.model.Aluno;
-import com.projeto_extensionista2.pac_kids.model.Scoreboard;
 import com.projeto_extensionista2.pac_kids.repository.AlunoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,10 +17,6 @@ public class AlunoService {
     AlunoRepository alunoRepository;
 
     public void criarAluno(Aluno aluno){
-        Scoreboard scoreboard = new Scoreboard();
-        scoreboard.setAluno(aluno);
-        scoreboard.setPontuacao(0);
-        aluno.setScoreboard(scoreboard);
         alunoRepository.save(aluno);
     }
 
@@ -49,20 +44,6 @@ public class AlunoService {
         alunoExistente.setDataNascimento(aluno.getDataNascimento());
         alunoRepository.save(alunoExistente);
 
-    }
-
-    public Optional<Scoreboard> buscarScoreboardDoAluno(Long alunoId) {
-        return alunoRepository.findById(alunoId)
-                .map(Aluno::getScoreboard);
-    }
-
-    public void atualizarPontuacao(Long alunoId, int pontuacao) {
-        Optional<Aluno> alunoOpt = alunoRepository.findById(alunoId);
-        if (alunoOpt.isPresent()) {
-            Scoreboard scoreboard = alunoOpt.get().getScoreboard();
-            scoreboard.setPontuacao(scoreboard.getPontuacao() + pontuacao);
-            alunoRepository.save(alunoOpt.get());
-        }
     }
 
 

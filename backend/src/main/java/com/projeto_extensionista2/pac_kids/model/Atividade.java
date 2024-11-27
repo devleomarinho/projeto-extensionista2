@@ -11,15 +11,16 @@ public class Atividade {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String titulo;
+    private String nome;
     private String descricao;
-    private int pontuacao;
 
-    @ManyToOne
-    @JoinColumn(name = "scoreboard_id")
-    private Scoreboard scoreboard;
+    private int scoreboard = 0;
 
-    @ManyToOne
-    @JoinColumn(name = "aluno_id")
-    private Aluno aluno;
+//    @ManyToOne
+//    @JoinColumn(name = "scoreboard_id")
+//    private Scoreboard scoreboard;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "aluno_id")
+//    private Aluno aluno;
 }

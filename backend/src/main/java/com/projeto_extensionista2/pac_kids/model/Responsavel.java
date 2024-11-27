@@ -28,14 +28,7 @@ public class Responsavel {
 
     private LocalDate dataNascimento;
 
-    @OneToMany(mappedBy = "responsavel", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Aluno> alunos;
 
-    @Column(unique = true, nullable = false)
-    private String username;
-
-    @Column(nullable = false)
-    private String password;
 }
 
 

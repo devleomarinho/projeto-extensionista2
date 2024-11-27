@@ -27,19 +27,5 @@ public class Aluno {
 
     private LocalDate dataNascimento;
 
-    @ManyToOne
-    @JoinColumn(name = "responsavel_id")
-    private Responsavel responsavel;
 
-    @OneToMany(mappedBy = "aluno", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Atividade> atividades = new ArrayList<>();
-
-    @OneToOne(mappedBy = "aluno", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Scoreboard scoreboard;
-
-    @Column(unique = true, nullable = false)
-    private String username;
-
-    @Column(nullable = false)
-    private String password;
 }
