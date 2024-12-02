@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginController {
 
     @PostMapping
-    public ResponseEntity<Boolean> login(@RequestParam String username, @RequestParam
-    String password) {
+    public ResponseEntity<Boolean> login(@RequestParam String username, @RequestParam String password) {
 
         return ResponseEntity.ok(true);
     }
