@@ -1,4 +1,4 @@
-# Projeto Extensionista 2 - Pac-Kids
+# Projeto Extensionista - Pac-Kids
 
 ## Descrição do Projeto
 
@@ -26,7 +26,38 @@
    ```bash
    cd  projeto-extensionista2
 
+# Frontend
 
+As interfaces de usuário foram desenvolvidas com React em conjunto com Vite e TypeScript, e a navegação entre as telas utiliza react-router-dom.
+
+## Funcionalidades Principais
+
+Navegação entre páginas com react-router-dom, utilizando componentes modulares e reutilizáveis para melhor organização e manutenção do código. A interface é intuitiva e responsiva, voltada para o público infantil.
+
+## Tecnologias Utilizadas
+
+- React: Biblioteca para construção de interfaces de usuário
+- Vite: Ferramenta de desenvolvimento para projetos front-end com foco em velocidade e eficiência
+- TypeScript: Superset do JavaScript que adiciona tipagem estática
+- react-router-dom: Biblioteca para navegação entre páginas no React
+
+## Documentação das Telas
+Cada tela da aplicação foi projetada com um fluxo amigável para crianças e inclui elementos visuais atrativos. 
+
+-Tela Inicial: Tela de boas-vindas com acesso ao menu principal. 
+- Aulas: Interface de seleção de aulas com conteúdos organizados.
+- Jogos Interativos: Tela de atividades para praticar vocabulário e gramática.
+
+
+### Protótipos das telas:
+
+![image](https://github.com/user-attachments/assets/786c7a67-da26-4d68-ad4e-464ea28e9f8f)
+
+
+![image](https://github.com/user-attachments/assets/d4c15411-93c8-46a8-b7e8-b1c834c00645)
+
+
+# Backend 
 
 ## Descrição das Entidades
 
@@ -120,10 +151,3 @@ O package de DTOs (Data Transfer Object) contém três classes usadas para trans
 ![image](https://github.com/user-attachments/assets/95012c33-a439-4a03-a54e-f4a1e2384592)
 
 
-
-## Protótipos das telas:
-
-![image](https://github.com/user-attachments/assets/786c7a67-da26-4d68-ad4e-464ea28e9f8f)
-
-
-![image](https://github.com/user-attachments/assets/d4c15411-93c8-46a8-b7e8-b1c834c00645)
