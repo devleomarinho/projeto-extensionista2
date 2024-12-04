@@ -26,10 +26,6 @@
    ```bash
    cd  projeto-extensionista2
 
-3. **Alternar para a branch de desenvolvimento:**
-  ```bash
-  git checkout dev
-  ```
 
 
 ## Descrição das Entidades
@@ -41,12 +37,10 @@ A entidade Aluno representa as crianças que utilizarão a plataforma para apren
 Atributos:
 - id: Identificador único do aluno (gerado automaticamente).
 - nome: Nome completo do aluno.
-- usuario: Nome de usuário para login no sistema.
-- senha: Senha para acesso ao sistema (armazenada de forma segura).
-- responsavel: Relacionamento com a entidade Responsavel (muitos-para-um).
-- atividades: Lista de atividades associadas ao aluno (um-para-muitos).
-- scoreboard: Relacionamento com a entidade Scoreboard (um-para-um).
-
+- cpf: CPF do aluno
+- email: Endereço de email do aluno.
+- dataNascimento: Data de nascimento do aluno.
+  
 2. **Responsavel**
    
 A entidade Responsavel representa os pais ou responsáveis pelas crianças.
@@ -55,10 +49,11 @@ Atributos:
 
 - id: Identificador único do responsável (gerado automaticamente).
 - nome: Nome completo do responsável.
-- usuario: Nome de usuário para login no sistema.
-- senha: Senha para acesso ao sistema (armazenada de forma segura).
-- alunos: Lista de alunos sob responsabilidade (um-para-muitos).
-
+- cpf: CPF do responsável
+- email: Endereço de email do responsável.
+- dataNascimento: Data de nascimento do responsável.
+- telefone: Número de telefone do responsável.
+  
 3. **Atividade**
    
 A entidade Atividade representa as atividades que os alunos podem realizar.
@@ -66,53 +61,69 @@ A entidade Atividade representa as atividades que os alunos podem realizar.
 Atributos:
 
 - id: Identificador único da atividade (gerado automaticamente).
-- titulo: Título da atividade.
+- nome: Título da atividade.
 - descricao: Descrição detalhada da atividade.
-- pontuacao: Pontuação atribuída à atividade.
-- aluno: Relacionamento com a entidade Aluno (muitos-para-um).
+- scoreboard: Pontuação atribuída à atividade.
 
 
-4. **Scoreboard**
+4. **Pergunta**
    
-A entidade Scoreboard representa o sistema de pontuação dos alunos.
+A entidade Pergunta representa um pergunta usada em uma atividade de exemplo.
 
 Atributos:
 
-- id: Identificador único do scoreboard (gerado automaticamente).
-- aluno: Relacionamento com a entidade Aluno (um-para-um).
-- pontuacaoTotal: Total de pontos acumulados pelo aluno.
-- atividades: Lista de atividades que contribuíram para a pontuação (um-para-muitos).
+- id: Identificador único da pergunta (gerado automaticamente).
+- texto: Pergunta a ser armazenada e relacionada com uma atividade. 
+- atividade: Relacionamento desta entidade com uma atividade, através da atividade_id (muitos-para-um).
+- resposta: Relacionamento desta entidade com uma resposta, para verificação de acertos da pergunta (um-para-muitos).
 
 
-5. **Notificacao**
+5. **Resposta**
    
-A entidade Notificacao representa as notificações que podem ser enviadas aos responsáveis e alunos.
+A entidade Resposta serve para armazenar a resposta correta de uma pergunta específica da atividade de exemplo.
 
 Atributos:
 
 - id: Identificador único da notificação (gerado automaticamente).
-- mensagem: Texto da notificação.
-- data: Data em que a notificação foi enviada.
-- responsavel: Relacionamento com a entidade Responsavel (muitos-para-um).
-- aluno: Relacionamento com a entidade Aluno (muitos-para-um).
+- texto: Texto da resposta corrreta.
+- pergunta: Relacionamento com a entidade pergunta, através do atributo pergunta_id (um-para-um).
 
+6. **DTOs**
+
+O package de DTOs (Data Transfer Object) contém três classes usadas para transferência de dados usadas na camada Controller:
+
+- PerguntaDTO: transfere os atributos **texto** e **resposta** da entidade Pergunta;
+- RespostaDTO: transfere o atributo **texto** da entidade Resposta;
+- AtividadeComPerguntas: transfere os atributos **nome**, **descricao** e uma lista de **PerguntaDTO** da entidade Atividade
 
 ## Endpoints do Backend
 
 | Método HTTP | Endpoint                      | Descrição                                                    |
-|-------------|-------------------------------|-------------------------------------------------------------|
-| **POST**    | `/api/alunos`                 | Cadastra um novo aluno.                                      |
-| **GET**     | `/api/alunos/{id}`            | Retorna informações de um aluno específico pelo ID.          |
-| **GET**     | `/api/alunos/{id}/scoreboard` | Retorna o scoreboard do aluno.                               |
-| **PUT**     | `/api/alunos/{id}`            | Atualiza informações de um aluno.                            |
-| **DELETE**  | `/api/alunos/{id}`            | Remove um aluno do sistema.                                  |
-| **POST**    | `/api/responsaveis`           | Cadastra um novo responsável.                                |
-| **GET**     | `/api/responsaveis/{id}`      | Retorna informações de um responsável específico pelo ID.    |
-| **GET**     | `/api/responsaveis/{id}/scoreboards` | Retorna scoreboards de todos os alunos sob a responsabilidade do responsável. |
-| **POST**    | `/api/atividades`             | Cadastra uma nova atividade.                                 |
-| **GET**     | `/api/atividades/{id}`        | Retorna informações de uma atividade específica pelo ID.     |
-| **PUT**     | `/api/atividades/{id}`        | Atualiza informações de uma atividade.                       |
-| **DELETE**  | `/api/atividades/{id}`        | Remove uma atividade do sistema.                             |
-| **GET**     | `/api/notificacoes`           | Lista todas as notificações enviadas.                        |
+|-------------|-------------------------------|--------------------------------------------------------------|
+| **POST**    | `/alunos`                     | Cadastra um novo aluno.                                      |
+| **GET**     | `/alunos/{id}`                | Retorna informações de um aluno específico pelo ID.          |
+| **GET**     | `/alunos`                     | Retorna uma lista de alunos.                                 |
+| **PUT**     | `/alunos/{id}`                | Atualiza informações de um aluno.                            |
+| **DELETE**  | `/alunos/{id}`                | Remove um aluno do sistema.                                  |
+| **POST**    | `/responsaveis`               | Cadastra um novo responsável.                                |
+| **GET**     | `/responsaveis/{id}`          | Retorna informações de um responsável específico pelo ID.    |
+| **GET**     | `/responsaveis                | Retorna uma lista de responsáveis cadastrados.               |
+| **POST**    | `/atividades/criar`           | Cadastra uma nova atividade.                                 |
+| **POST**    | `/atividades/verificar/{perguntaId}`| Verificar a resposta de uma pergunta                   |
+| **GET**     | `/atividades/{id}`            | Retorna informações de uma atividade específica pelo ID.     |
+| **PUT**     | `/atividades/{id}`            | Atualiza informações de uma atividade.                       |
+| **DELETE**  | `/atividades/{id}`            | Remove uma atividade do sistema.                             |
+| **GET**     | `/atividades`                 | Lista todas as atividades cadastradas                        |
+
+## Esquema de entidades
+
+![image](https://github.com/user-attachments/assets/95012c33-a439-4a03-a54e-f4a1e2384592)
 
 
+
+## Protótipos das telas:
+
+![image](https://github.com/user-attachments/assets/786c7a67-da26-4d68-ad4e-464ea28e9f8f)
+
+
+![image](https://github.com/user-attachments/assets/d4c15411-93c8-46a8-b7e8-b1c834c00645)
