@@ -2,7 +2,7 @@
 
 ## Descrição do Projeto
 
-**Pac-kids** é uma plataforma de aprendizado voltada para o ensino de idiomas (Português e Inglês) para crianças. A plataforma permite que os alunos realizem atividades e acumulem pontuações em um sistema de scoreboard, enquanto os responsáveis têm acesso a informações importantes, como boletins, atividades e notificações. O sistema é construído com uma arquitetura de backend em Java/Spring Boot e frontend em React.
+**Pac-kids** é uma plataforma de aprendizado voltada para o ensino de inglês para crianças. A plataforma permite que os alunos realizem atividades e acumulem pontuações em um sistema de scoreboard, enquanto os responsáveis têm acesso a informações importantes, como boletins e atividades. O sistema é construído com uma arquitetura de backend em Java/Spring Boot e frontend em React.
 
 ## Tecnologias Utilizadas
 
