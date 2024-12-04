@@ -1,0 +1,31 @@
+.app-content {
+    background-color: #F0F1F4;
+}
+
+.start-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    height: 30vh;
+    width: 100vw;
+}
+
+.start-div h1 {
+    font-weight: 600;
+    color: #0000FF;
+    letter-spacing: 2px;
+}
+
+.start-div .button {
+    padding: 20px 40px;
+    border-radius: 10px;
+    border: none;
+    background-color: #0000FF;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+}
+

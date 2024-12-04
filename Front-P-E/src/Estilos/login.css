@@ -1,0 +1,130 @@
+.image-boxl {
+    transform: translateY(5vh);
+}
+
+img {
+    width: 40vw;
+    
+}
+
+section.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 45vh;
+    width: 100%;
+}
+
+.login-form {
+    height: 30vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    
+}
+
+label {
+    font-weight: 600;
+    color: #0000FF;
+}
+
+input {
+    padding: 2vh 15vw;
+    background: transparent;
+    border: 2px solid #0000FF;
+    border-radius: 6px;
+}
+
+.login-button {
+    padding: 2vh 30vw;
+    border-radius: 10px;
+    border: none;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all .3s ease;
+    background-color: #0000FF;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    
+}
+
+.login-button:hover {
+    letter-spacing: 2px;
+}
+
+.footer {
+    height: 20vh;
+    width: 100%;
+}
+
+.login-options {
+    width: 60vw;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.login-opt {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    font-size: 3rem;
+    border-radius: 100%;
+    border: 2px solid #0000FF;
+    color: #0000FF;
+}
+
+@media (min-width: 768px) {
+
+    .app-content {
+        display: flex;
+        flex-direction: row;
+        height: 100vh;
+        width: 100vw;
+        justify-content: space-around;
+    }
+
+    section.login-container {
+        width: 50vw;
+    }
+
+    .login-opt {
+        display: none;
+    }
+    .login-options {
+        display: none;
+    }
+
+    .login-button {
+        padding: 2vh 10vw;
+        border-radius: 10px;
+        border: none;
+        font-weight: 700;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all .3s ease;
+        background-color: #0000FF;
+        color: #fff;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        
+    }
+
+    .image-boxl {
+        transform: translateY(-2vh);
+        transform: translateX(2vw);
+    }
+
+    input {
+        padding: 2vh 7vw;
+        background: transparent;
+        border: 2px solid #0000FF;
+        border-radius: 6px;
+    }
+}

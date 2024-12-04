@@ -16,11 +16,4 @@ public class Atividade {
 
     private int scoreboard = 0;
 
-//    @ManyToOne
-//    @JoinColumn(name = "scoreboard_id")
-//    private Scoreboard scoreboard;
-//
-//    @ManyToOne
-//    @JoinColumn(name = "aluno_id")
-//    private Aluno aluno;
 }
