@@ -57,6 +57,32 @@ Cada tela da aplicação foi projetada com um fluxo amigável para crianças e i
 ![image](https://github.com/user-attachments/assets/d4c15411-93c8-46a8-b7e8-b1c834c00645)
 
 
+### Telas finalizadas
+
+- Tela inicial: 
+
+![packids_telainicial](https://github.com/user-attachments/assets/1c9243c1-f1a0-480a-aa00-00e1f4246a97)
+
+- Tela de login:
+
+![packids_cadastro](https://github.com/user-attachments/assets/cd8fa138-2f6b-47fb-b0c7-014e88bcbe11)
+
+- Telas de cadastro:
+
+![packids_login](https://github.com/user-attachments/assets/2234cd20-3a5b-4c3a-8415-8c441831b2d5)
+
+- Tela de iniciar atividade:
+
+![packids_iniciaratividade](https://github.com/user-attachments/assets/ba4d0ad7-fb4f-4f13-9c50-f1b267df9638)
+
+- Tela de atividade:
+  
+![packids_atividade](https://github.com/user-attachments/assets/a6b7af48-af05-4c30-b304-958095efd0f0)
+
+- Tela de pontuação
+
+![packids_pontuacao](https://github.com/user-attachments/assets/d51a2290-c86f-4b28-8d66-6b8f0bc6078a)
+
 # Backend 
 
 ## Descrição das Entidades
